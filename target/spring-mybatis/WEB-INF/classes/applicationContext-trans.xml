@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+		
+	<!-- 事务管理器 
+	   配置service层中事务提交问题
+	   需要关联applicationContext-dao.xml中的dataSource,启动tomcat，spring容器同时加载三个文件，所以dataSource
+	   数据库中的数据的读取？？？脏读，幻读
+	   事务隔离级别？？？
+	   -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 基于注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 基于xml  -->
+<!-- 	<tx:advice id="txAdvice" transaction-manager="transactionManager"> -->
+<!-- 		<tx:attributes> -->
+         <!-- name 方法名 
+              isolation 
+              propagation
+              read-only
+         -->
+<!-- 			<tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/> -->
+<!-- 			<tx:method name="add*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/> -->
+<!-- 			<tx:method name="insert*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/> -->
+<!-- 			<tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/> -->
+<!-- 			<tx:method name="modify*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/> -->
+<!-- 			<tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/> -->
+<!-- 			<tx:method name="remove*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/> -->
+<!-- 			<tx:method name="select*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/> -->
+<!-- 			<tx:method name="find*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/> -->
+<!-- 			<tx:method name="query*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/> -->
+<!-- 			<tx:method name="list*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/> -->
+<!-- 		</tx:attributes> -->
+<!-- 	</tx:advice> -->
+	<!-- 将通知织入切入点 -->
+<!-- 	<aop:config> -->
+        <!-- 配置切入点 -->
+<!-- 		<aop:pointcut expression="execution(* com.briup.service..*.*(..))" id="point"/> -->
+         <!-- advice-ref 关联通知   -->
+<!-- 		<aop:advisor advice-ref="txAdvice" pointcut-ref="point"/> -->
+<!-- 	</aop:config> -->
+</beans>

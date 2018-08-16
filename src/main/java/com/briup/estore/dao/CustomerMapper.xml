@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.estore.dao.ICustomerDao">
+<insert id="saveCustomer" parameterType="com.briup.estore.common.bean.Customer">
+<selectKey keyColumn="id" keyProperty="id" resultType="Long" order="BEFORE"> 
+select cus_id.nextval from dual</selectKey>
+insert into customer values(#{id},#{name},#{password},#{zip},#{address},#{telephone},#{email})
+</insert>
+<select id="findByName" resultType="com.briup.estore.common.bean.Customer" parameterType="String">
+select * from customer where name=#{name}
+</select>
+ <update id="updateCustomer" parameterType="com.briup.estore.common.bean.Customer"> 
+update customer 
+<set> 
+      <if test="name != null">name=#{name},</if> 
+       <if test="password!= null">password=#{password},</if>
+       <if test="zip!= null">zip=#{zip},</if> 
+       <if test="address!= null">address=#{address},</if> 
+       <if test="telephone!= null">telephone=#{telephone},</if>
+      <if test="email!= null">email=#{email},</if>
+     </set> 
+ where name=#{name}
+ </update> 
+<!-- <delete id="updateCustomer" parameterType="Customer"> -->
+<!-- delete from customer where name=#{name} -->
+<!-- </delete> -->
+</mapper>			

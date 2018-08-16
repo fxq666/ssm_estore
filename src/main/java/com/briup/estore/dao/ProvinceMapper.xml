@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.estore.dao.IProvinceDao">
+<resultMap type="com.briup.estore.common.bean.Province" id="ProvinceResult">
+<id property="id" column="id" /> 
+				<result property="province" column="province" /> 	
+				<result property="contry" column="contry" /> 	
+</resultMap>
+<select id="findByCountry" resultMap="ProvinceResult" parameterType="Integer">
+select * from province where contry=#{contry}
+</select>
+<select id="queryAllbyCountry" resultMap="ProvinceResult" parameterType="Integer">
+select * from province where contry=#{contry}
+</select>
+<select id="queryAllbyCountry2" resultMap="ProvinceResult" parameterType="Integer">
+select * from province where contry=#{contry}
+</select>
+</mapper>
